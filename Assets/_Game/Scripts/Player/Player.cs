@@ -1,7 +1,8 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IKitchenObjectParent
+public class Player : NetworkBehaviour, IKitchenObjectParent
 {
     public event EventHandler OnPickSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         public BaseCounter baseCounter;
     }
 
-    public static Player Instance { get; private set; }
+    //public static Player Instance { get; private set; }
 
     [Header("Movement Setting")]
 
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     [Header("Reference")]
 
-    [SerializeField] private GameInputManager gameInputManager;
+    //[SerializeField] private GameInputManager gameInputManager;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
 
@@ -39,21 +40,15 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.LogError("Multiple instance of player class", this);
-        }
+       
+        //Instance = this;
         baseCounter = null;
     }
 
     private void OnEnable()
     {
-        gameInputManager.OnInteractAction += GameInputManager_OnInteractAction;
-        gameInputManager.OnInteractAlternateAction += GameInputManager_OnInteractAlternateAction;
+        GameInputManager.Instance.OnInteractAction += GameInputManager_OnInteractAction;
+        GameInputManager.Instance.OnInteractAlternateAction += GameInputManager_OnInteractAlternateAction;
     }
 
     private void GameInputManager_OnInteractAlternateAction(object sender, EventArgs e)
@@ -80,14 +75,14 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void OnDisable()
     {
-        gameInputManager.OnInteractAction -= GameInputManager_OnInteractAction;
-        gameInputManager.OnInteractAlternateAction -= GameInputManager_OnInteractAlternateAction;
+        GameInputManager.Instance.OnInteractAction -= GameInputManager_OnInteractAction;
+        GameInputManager.Instance.OnInteractAlternateAction -= GameInputManager_OnInteractAlternateAction;
     }
 
     private void Update()
     {
 
-        Vector2 inputVector = gameInputManager.GetMovementInputNormalize();
+        Vector2 inputVector = GameInputManager.Instance.GetMovementInputNormalize();
 
         Vector3 moveDir = new(inputVector.x, 0, inputVector.y);
 

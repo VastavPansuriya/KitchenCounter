@@ -7,7 +7,7 @@ public class SelectedCounterVisuals : MonoBehaviour
     [SerializeField] private GameObject[] selectedCoutnerVisualAll;
     private void OnEnable()
     {
-        Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        //Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
     }
 
     private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e)
@@ -20,6 +20,6 @@ public class SelectedCounterVisuals : MonoBehaviour
 
     private void OnDisable()
     {
-        Player.Instance.OnSelectedCounterChanged -= Player_OnSelectedCounterChanged;
+        //Player.Instance.OnSelectedCounterChanged -= Player_OnSelectedCounterChanged;
     }
 }

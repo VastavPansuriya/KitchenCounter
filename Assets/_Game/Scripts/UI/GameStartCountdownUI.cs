@@ -52,6 +52,7 @@ public class GameStartCountdownUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
     private void OnDestroy()
     {
         KitchenGameManager.Instance.OnGameStateChanged -= KitchenGameManager_OnGameStateChanged;

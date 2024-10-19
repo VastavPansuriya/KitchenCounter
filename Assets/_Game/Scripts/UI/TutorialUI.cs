@@ -28,6 +28,7 @@ public class TutorialUI : MonoBehaviour
     {
         if (KitchenGameManager.Instance.IsCountDownToStartActive())
         {
+            Debug.Log("Called");
             Hide();
         }
     }
@@ -39,6 +40,7 @@ public class TutorialUI : MonoBehaviour
     private void OnDestroy()
     {
         GameInputManager.Instance.OnBindingRebind -= GameInputManager_OnBindingRebind;
+        KitchenGameManager.Instance.OnGameStateChanged -= KitchenGameManager_OnGameStateChanged;
     }
 
     private void UpdateVisuals()
@@ -64,4 +66,6 @@ public class TutorialUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour
@@ -18,19 +17,18 @@ public class KitchenGameManager : MonoBehaviour
         GameOver
     }
 
-    private GameState gameState;
-    private float coutDownToStartTimer = 3f;
+    [SerializeField] private GameState gameState;
+    [SerializeField] private float coutDownToStartTimer = 3f;
     private float gamePlayingTimer = 10f;
 
 
     private bool isGamePause = false;
     private void Awake()
     {
-        coutDownToStartTimer = 3f; 
-
         Instance = this;
         gameState = GameState.WaitingToStart;
     }
+
     private void Start()
     {
         GameInputManager.Instance.OnPause += GameInputManager_OnPause;
@@ -49,6 +47,7 @@ public class KitchenGameManager : MonoBehaviour
     private void OnDestroy()
     {
         GameInputManager.Instance.OnPause -= GameInputManager_OnPause;
+        GameInputManager.Instance.OnInteractAction -= GameInputManager_OnInteractAction;
     }
     private void GameInputManager_OnPause(object sender, EventArgs e)
     {
