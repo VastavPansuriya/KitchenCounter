@@ -20,7 +20,7 @@ public class SoundManager : MonoBehaviour
         DeliveryManager.Instance.OnRecipeSuccess += DeliveryManager_OnRecipeSuccess;
         DeliveryManager.Instance.OnRecipeFailed += DeliveryManager_OnRecipeFailed;
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
-        //Player.Instance.OnPickSomething += Player_OnPickSomething;
+        Player.OnAnyPlayerPickedSomething += Player_OnAnyPlayerPickedSomething;
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
         TrashCounter.OnAnyObjectTrashed += TrashCounter_OnAnyObjectTrashed;
         PlateKitchenObject.OnPlateUsed += PlateKitchenObject_OnPlateUsed;
@@ -48,11 +48,11 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipsRefSO.objectDrop, baseCounter.transform.position);
     }
 
-    private void Player_OnPickSomething(object sender, EventArgs e)
+    private void Player_OnAnyPlayerPickedSomething(object sender, Vector3 e)
     {
         Debug.Log("Working " + sender);
 
-        //PlaySound(audioClipsRefSO.objectPickup, Player.Instance.transform.position);
+        PlaySound(audioClipsRefSO.objectPickup, e);
     }
 
     private void CuttingCounter_OnAnyCut(object sender, EventArgs e)
@@ -82,7 +82,7 @@ public class SoundManager : MonoBehaviour
         DeliveryManager.Instance.OnRecipeSuccess -= DeliveryManager_OnRecipeSuccess;
         DeliveryManager.Instance.OnRecipeFailed -= DeliveryManager_OnRecipeFailed;
         CuttingCounter.OnAnyCut -= CuttingCounter_OnAnyCut;
-        //Player.Instance.OnPickSomething -= Player_OnPickSomething;
+        Player.OnAnyPlayerPickedSomething -= Player_OnAnyPlayerPickedSomething;
         BaseCounter.OnAnyObjectPlacedHere -= BaseCounter_OnAnyObjectPlacedHere;
         TrashCounter.OnAnyObjectTrashed -= TrashCounter_OnAnyObjectTrashed;
         PlateKitchenObject.OnPlateUsed -= PlateKitchenObject_OnPlateUsed;
