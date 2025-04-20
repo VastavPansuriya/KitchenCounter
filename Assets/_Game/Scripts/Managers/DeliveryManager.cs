@@ -118,16 +118,16 @@ public class DeliveryManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void DeliverCorrectRecipeServerRpc(int correctRecipe)
+    private void DeliverCorrectRecipeServerRpc(int correctRecipeIndex)
     {
-        DeliverCorrectRecipeClientRpc(correctRecipe);
+        DeliverCorrectRecipeClientRpc(correctRecipeIndex);
     }
 
     [ClientRpc]
-    private void DeliverCorrectRecipeClientRpc(int correctRecipe)
+    private void DeliverCorrectRecipeClientRpc(int correctRecipeIndex)
     {
         successfulRecipeCount++;
-        waitingRecipeSOList.RemoveAt(correctRecipe);
+        waitingRecipeSOList.RemoveAt(correctRecipeIndex);
         OnRecipeComplete?.Invoke(this, EventArgs.Empty);
         OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
     }

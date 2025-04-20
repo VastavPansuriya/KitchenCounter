@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour
 {
-    [SerializeField] private float gamePlayingTimerMax = 10f; 
     public static KitchenGameManager Instance { get; private set; }
 
     public event EventHandler OnGameStateChanged;
@@ -19,6 +18,7 @@ public class KitchenGameManager : MonoBehaviour
 
     [SerializeField] private GameState gameState;
     [SerializeField] private float coutDownToStartTimer = 3f;
+    [SerializeField] private float gamePlayingTimerMax = 300f; 
     private float gamePlayingTimer = 10f;
 
 
